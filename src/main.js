@@ -13,5 +13,5 @@ import 'vant/lib/index.css'
 const app = createApp(App)
 
 app.use(router)
-app.use(Button)
+app.use(Button) // 注册按钮
 app.mount('#app')
