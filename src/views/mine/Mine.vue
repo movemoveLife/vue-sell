@@ -1,12 +1,29 @@
 <template>
-    <div>我的</div>
+  <div class="mine">
+    <div class="content"></div>
+    <Footer />
+  </div>
 </template>
 
-<script>  
-export default {  
-  name: 'Mine'  
+<script>
+import Footer from '@/components/Footer.vue';
+export default {
+  name: 'Mine',
+  components: {
+    Footer
+  },
 }  
-</script>  
+</script>
 
-<style scoped>
+<style lang="less" scoped>
+.mine {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
 </style>
