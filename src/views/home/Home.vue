@@ -1,22 +1,18 @@
 <template>
   <div class="home">
-    <div>首页</div>
-    <van-button type="primary">主要按钮</van-button>
-    <van-button type="success">成功按钮</van-button>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from '@/components/Footer.vue';
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    Footer
+  },
 }  
 </script>
 
 <style lang="less" scoped>
-.home {
-  div {
-    color: black;
-    font-size: 30px;
-  }
-}
 </style>
