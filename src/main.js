@@ -1,4 +1,4 @@
-import './assets/reset.css'
+import './assets/base.css'
 import 'amfe-flexible'
 
 import { createApp } from 'vue'
