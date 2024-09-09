@@ -17,7 +17,7 @@ export default defineConfig({
     postcss: {
       plugins: [
         pxtorem({
-          rootValue: 16, // 这里写设计稿的宽度/10即可，例如设计稿宽度是750px就写75
+          rootValue: 37.5, // 这里写设计稿的宽度/10即可，例如设计稿宽度是750px就写75
           // vant默认是37.5，如果是使用了vant的话可以像下面这样写
           // rootValue(res) {
           //   return res.file.indexOf("vant") !== -1 ? 37.5 : 75;
