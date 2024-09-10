@@ -26,7 +26,14 @@
                 {{ item.name }}
               </div>
             </div>
-            <div class="small-sort"></div>
+            <div class="small-sort">
+              <div v-for="(item, index) in data.small_sort" :key="index">
+                <svg class="icon" aria-hidden="true">
+                  <use :xlink:href="`#${item.icon}`"></use>
+                </svg>
+                {{ item.name }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -74,11 +81,11 @@ let data = reactive(
     small_sort: [
       {
         name: "午餐",
-        icon: "icon-wucan",
+        icon: "icon-icon_wucan",
       },
       {
         name: "买酒",
-        icon: "icon-jiu",
+        icon: "icon-jiushui",
       },
       {
         name: "新鲜水果",
@@ -110,7 +117,7 @@ let data = reactive(
       },
       {
         name: "全部分类",
-        icon: "icon-fenlei",
+        icon: "icon-nav-01",
       },
     ],
     centent_nav_list: [
@@ -284,6 +291,26 @@ let data = reactive(
                 height: 50px;
                 margin-bottom: 5px;
               }
+            }
+          }
+
+          .small-sort {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+
+            div {
+              display: flex;
+              justify-content: center;
+              flex-flow: column;
+              align-items: center;
+              width: 20%;
+            }
+
+            .icon {
+              width: 30px;
+              height: 30px;
+              margin: 10px;
             }
           }
         }
