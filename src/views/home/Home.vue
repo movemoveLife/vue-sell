@@ -1,12 +1,26 @@
 <template>
   <div class="home">
     <div class="content">
+      <!-- 头部 -->
       <div class="header">
         <div class="text">外卖</div>
         <div class="location">
           <van-icon name="location-o" />
           <span>jason课程</span>
           <van-icon name="arrow" />
+        </div>
+      </div>
+      <!-- 主要的内容区域 -->
+      <div class="main">
+        <div class="main-bg">
+          <div class="search">
+            <input type="text" />
+            <div class="search-text">搜索</div>
+          </div>
+          <div class="sort">
+            <div class="big-sort"></div>
+            <div class="small-sort"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -51,6 +65,40 @@ export default {
 
         span {
           margin: 0 5px;
+        }
+      }
+    }
+
+    .main {
+      margin-top: -30px;
+
+      .main-bg {
+        background-image: linear-gradient(#fff, #f5f5f5);
+        padding: 10px 20px 0px 20px;
+        border-radius: 30px 30px 0 0;
+
+        .search {
+          position: relative;
+
+          input {
+            width: 100%;
+            border: 1px solid #ffc400;
+            border-radius: 20px;
+            height: 30px;
+          }
+
+          .search-text {
+            position: absolute;
+            right: -6px;
+            top: 1px;
+            background-color: #ffc400;
+            border-radius: 16px;
+            width: 50px;
+            height: 32px;
+            line-height: 32px;
+            font-size: 14px;
+            text-align: center;
+          }
         }
       }
     }
