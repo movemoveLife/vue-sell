@@ -36,6 +36,11 @@
             </div>
           </div>
         </div>
+        <van-tabs v-model:active="active" class="van-tabs">
+          <van-tab v-for="(item, index) in data.centent_nav_list" :title="item.tab" :key="index">
+            <NavList :navList="item.data" />
+          </van-tab>
+        </van-tabs>
       </div>
     </div>
     <Footer />
@@ -44,16 +49,18 @@
 
 <script>
 import Footer from '@/components/Footer.vue';
+import NavList from '@/views/home/components/NavList.vue';
 export default {
   name: 'Home',
   components: {
-    Footer
+    Footer,
+    NavList
   },
 }  
 </script>
 
 <script setup>
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs, ref } from 'vue';
 let data = reactive(
   {
     big_sort: [
@@ -207,6 +214,7 @@ let data = reactive(
     ],
   }
 )
+const active = ref(0)
 </script>
 
 <style lang="less" scoped>
@@ -315,7 +323,15 @@ let data = reactive(
           }
         }
       }
+
+      .van-tabs {
+        padding: 0 20px, 10px;
+      }
     }
   }
+}
+
+/deep/ .van-tabs__wrap {
+  border-radius: 10px;
 }
 </style>
