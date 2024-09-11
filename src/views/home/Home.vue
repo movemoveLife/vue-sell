@@ -199,7 +199,7 @@ let data = reactive(
             pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
             title: "酸菜鱼",
             sales: "2888",
-            price: "20",
+            price: "21",
             label: ["门店上新", "很下饭"],
           },
           {
