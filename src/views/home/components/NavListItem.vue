@@ -1,5 +1,5 @@
 <template>
-    <div class="item">
+    <div class="item" @click="toStore">
         <img :src="itemContent.pic" />
         <div class="item-right">
             <div class="title">{{ itemContent.title }}</div>
@@ -18,7 +18,14 @@
 export default {
     props: ["itemContent"]
 };
+</script>
 
+<script setup>
+import { useRouter } from "vue-router"
+const router = useRouter() // 为什么放在箭头函数里面会报错
+const toStore = () => {
+    router.push("/store")
+}
 </script>
 
 <style lang="less" scoped>
