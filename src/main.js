@@ -6,7 +6,7 @@ import App from './App.vue'
 import router from './router'
 
 // 1. 引入vant组件库
-import { Button, Icon, Tabs, Tab } from 'vant'
+import { Button, Icon, Tabs, Tab, TreeSelect } from 'vant'
 // 2. 引入vant样式
 import 'vant/lib/index.css'
 
@@ -17,4 +17,5 @@ app.use(Button) // 注册按钮
 app.use(Icon)
 app.use(Tabs)
 app.use(Tab)
+app.use(TreeSelect)
 app.mount('#app')
