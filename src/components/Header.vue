@@ -5,10 +5,9 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: ['title']
-};
+<script setup>
+import { defineProps } from 'vue'
+const props = defineProps(['title']);
 </script>
 
 <style lang="less" scoped>
