@@ -18,18 +18,11 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import Header from '@/components/Header.vue'
 import FoodList from './components/FoodList.vue'
-export default {
-    components: {
-        Header,
-        FoodList
-    }
-}
-</script>
-<script setup>
 import { reactive, toRefs } from 'vue'
+
 let data = reactive({
     title: '鱼拿酸菜鱼',
     img: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
