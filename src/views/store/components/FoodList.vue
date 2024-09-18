@@ -12,16 +12,21 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: ["index", "foodData"]
-};
-</script>
-
 <script setup>
-import { reactive, toRefs } from "vue";
+import { reactive, toRefs, defineProps } from "vue";
+const props = defineProps(['index', 'foodData']);
+
 let data = reactive({
     activeIndex: 0,
     items: [{ text: "分组 1" }, { text: "分组 2" }]
 });
+// 初始化数据
+const initData = () => {
+    let newArray = []
+    props.foodData?.items?.forEach((item, index) => {
+        newArray.push({ text: item.text })
+    })
+    data.items = newArray
+}
+initData()
 </script>
