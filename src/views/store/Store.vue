@@ -17,9 +17,9 @@
         </div>
         <van-action-bar>
             <van-action-bar-icon icon="chat-o" text="客服" />
-            <van-action-bar-icon icon="cart-o" text="购物车" :badge="store.state.cartList.length" />
-            <van-action-bar-button type="warning" text="加入购物车" @click="handleAddCart" />
-            <van-action-bar-button type="danger" text="立即购买" />
+            <van-action-bar-icon icon="cart-o" text="购物车" :badge="store.state.cartList.length" @click="goCart" />
+            <van-action-bar-button type="warning" text="加入购物车" @click="handleAddCart"/>
+            <van-action-bar-button type="danger" text="立即购买"  @click="goBuy"/>
         </van-action-bar>
     </div>
 </template>
@@ -29,8 +29,11 @@ import Header from '@/components/Header.vue'
 import FoodList from './components/FoodList.vue'
 import { reactive, toRefs } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { Toast } from 'vant'
 
 let store = useStore();
+let router = useRouter();
 let data = reactive({
     title: '鱼拿酸菜鱼',
     img: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
@@ -99,7 +102,7 @@ let data = reactive({
         },
     ],
 })
-const handleAddCart = () => {
+const handleAddCart = (type) => {
     const newList = [];
     data.storeData.forEach((item) => {
         item.data.items?.forEach((item) => {
@@ -110,7 +113,18 @@ const handleAddCart = () => {
             })
         });
     })
+    if (newList.length === 0) {
+        Toast("请选择商品");
+        return
+    }
     store.commit("addCart", newList);
+    type === 'buy' ? goCart() : ''
+}
+const goCart = () => {
+    router.push("/cart");
+}
+const goBuy = () => {
+    handleAddCart('buy')
 }
 </script>
 

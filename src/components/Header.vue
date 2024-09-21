@@ -1,13 +1,18 @@
 <template>
     <div class="header">
-        <van-icon name="arrow-left" class="icon"></van-icon>
+        <van-icon name="arrow-left" class="icon" @click="toBack"></van-icon>
         <div>{{ title }}</div>
     </div>
 </template>
 
 <script setup>
 import { defineProps } from 'vue'
+import { useRouter } from 'vue-router'
 const props = defineProps(['title']);
+const router = useRouter();
+const toBack = () => {
+    router.back();
+}
 </script>
 
 <style lang="less" scoped>
