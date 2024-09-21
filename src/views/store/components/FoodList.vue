@@ -4,7 +4,7 @@
             @click-nav="navClick">
             <template #content>
                 <div v-for="(item, index) in data.subItem" :key="index" class="item-bg">
-                    <FoodListItem :item="item" />
+                    <FoodListItem :item="item" :handleAdd="handleAdd" :handleChange="handleChange" />
                 </div>
             </template>
         </van-tree-select>
@@ -41,6 +41,22 @@ initData()
 const navClick = (index) => {
     data.activeIndex = index
     initData()
+}
+const handleAdd = (id) => {
+    data.subItem.forEach((item, index) => {
+        if (item.id === id) {
+            item.add = false
+            item.num += 1
+        }
+    })
+}
+const handleChange = (value, detail) => {
+    data.subItem.forEach(item => {
+        if (item.id === detail.name) {
+            item.num = value
+        }
+    })
+    // console.log(data.subItem)
 }
 </script>
 

@@ -4,8 +4,9 @@
             <img :src="item.pic" />
             <div class="text">
                 <div class="title">{{ item.title }}</div>
-                <van-stepper />
-                <van-icon name="add-o" />
+                <van-icon name="add-o" v-if="item.add" @click="handleAdd(item.id)" />
+                <van-stepper v-else v-model="item.num" @change="handleChange" :name="item.id" />
+                <!-- 注意：vant默认stepper为1，若设置为0，则为1 -->
             </div>
         </div>
         <div class="price">¥{{ item.price }}</div>
@@ -13,7 +14,7 @@
 </template>
 <script setup>
 import { defineProps } from 'vue';
-const props = defineProps(['item'])
+const props = defineProps(['item', 'handleAdd', 'handleChange'])
 </script>
 <style lang="less" scoped>
 .content-item {
