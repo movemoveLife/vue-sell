@@ -15,6 +15,12 @@
                 </van-tabs>
             </div>
         </div>
+        <van-action-bar>
+            <van-action-bar-icon icon="chat-o" text="客服" />
+            <van-action-bar-icon icon="cart-o" text="购物车" :badge="store.state.cartList.length" />
+            <van-action-bar-button type="warning" text="加入购物车" @click="handleAddCart" />
+            <van-action-bar-button type="danger" text="立即购买" />
+        </van-action-bar>
     </div>
 </template>
 
@@ -22,7 +28,9 @@
 import Header from '@/components/Header.vue'
 import FoodList from './components/FoodList.vue'
 import { reactive, toRefs } from 'vue'
+import { useStore } from 'vuex'
 
+let store = useStore();
 let data = reactive({
     title: '鱼拿酸菜鱼',
     img: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
@@ -91,6 +99,19 @@ let data = reactive({
         },
     ],
 })
+const handleAddCart = () => {
+    const newList = [];
+    data.storeData.forEach((item) => {
+        item.data.items?.forEach((item) => {
+            item.children.forEach((item) => {
+                if (item.num > 0) {
+                    newList.push(item)
+                }
+            })
+        });
+    })
+    store.commit("addCart", newList);
+}
 </script>
 
 <style lang="less" scoped>
