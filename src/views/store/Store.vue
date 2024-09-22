@@ -103,7 +103,7 @@ let data = reactive({
     ],
 })
 const handleAddCart = (type) => {
-    const newList = [];
+    const newList = store.state.cartList || []; // 若有数据则取原来存储的，没有则创建一个空数组
     data.storeData.forEach((item) => {
         item.data.items?.forEach((item) => {
             item.children.forEach((item) => {

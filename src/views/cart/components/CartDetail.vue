@@ -3,7 +3,7 @@
         <div class="content">
             <van-checkbox-group v-model="data.checked">
                 <div v-for="(item, index) in store.state.cartList">
-                    <ListItem :item="item" :handleAdd="handleAdd" :showCheckBox="true" />
+                    <ListItem :item="item" :handleChange="handleChange" :showCheckBox="true" />
                 </div>
             </van-checkbox-group>
         </div>
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import ListItem from '@/components/ListItem.vue'
 
@@ -19,9 +19,19 @@ const store = useStore()
 const data = reactive({
     checked: []
 })
-const handleAdd = (id) => {
-
+const handleChange = (value, detail) => {
+    store.state.cartList.map(item => {
+        if (item.id === detail.name) {
+            item.num = value
+        }
+    })
 }
+const init = () => { // 做默认全选功能
+    data.checked = store.state.cartList.map(item => item.id)
+}
+onMounted(() => {
+    init()
+})
 </script>
 
 <style lang="less" scoped>
