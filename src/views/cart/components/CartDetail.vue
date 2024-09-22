@@ -1,23 +1,27 @@
 <template>
     <div class="cartDetail">
         <div class="content">
-            <van-checkbox-group v-model="data.checked">
+            <van-checkbox-group v-model="data.checked" @change="groupChange">
                 <div v-for="(item, index) in store.state.cartList">
                     <ListItem :item="item" :handleChange="handleChange" :showCheckBox="true" />
                 </div>
             </van-checkbox-group>
         </div>
+        <van-submit-bar :price="allPrice" button-text="结算" @submit="onSubmit" class="submit-all" button-color="#ffc400">
+            <van-checkbox v-model="data.submitChecked" checked-color="#ffc400" @click="choseAll">全选</van-checkbox>
+        </van-submit-bar>
     </div>
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { reactive, onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import ListItem from '@/components/ListItem.vue'
 
 const store = useStore()
 const data = reactive({
-    checked: []
+    checked: [],
+    submitChecked: true
 })
 const handleChange = (value, detail) => {
     store.state.cartList.map(item => {
@@ -29,6 +33,34 @@ const handleChange = (value, detail) => {
 const init = () => { // 做默认全选功能
     data.checked = store.state.cartList.map(item => item.id)
 }
+const onSubmit = () => {
+    console.log('提交')
+}
+const choseAll = () => {
+    if (data.checked.length !== store.state.cartList.length) {
+        init()
+    } else {
+        data.checked = []
+    }
+}
+const groupChange = (result) => {
+    if (result.length === store.state.cartList.length) {
+        data.submitChecked = true
+    } else {
+        data.submitChecked = false
+    }
+    data.checked = result
+}
+const allPrice = computed(() => {
+    let countList = store.state.cartList.filter(item => {
+        return data.checked.includes(item.id)
+    })
+    let sum = 0
+    countList.forEach(item => {
+        sum += item.num * item.price
+    })
+    return sum * 100
+})
 onMounted(() => {
     init()
 })
@@ -44,7 +76,7 @@ onMounted(() => {
 
     .submit-all {
         position: fixed;
-        bottom: 48px;
+        bottom: 46px;
     }
 
     .buy {
