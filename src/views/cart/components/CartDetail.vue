@@ -7,9 +7,16 @@
                 </div>
             </van-checkbox-group>
         </div>
-        <van-submit-bar :price="allPrice" button-text="结算" @submit="onSubmit" class="submit-all" button-color="#ffc400">
-            <van-checkbox v-model="data.submitChecked" checked-color="#ffc400" @click="choseAll">全选</van-checkbox>
+        <van-submit-bar :price="allPrice" button-text="结算" @submit="onSubmit" class="submit-all" button-color="#ffc400"
+            v-if="store.state.isDelete">
+            <van-checkbox v-model="data.submitChecked" checked-color="#ffc400" @click="chooseAll">全选</van-checkbox>
         </van-submit-bar>
+        <div class="buy" v-else>
+            <div class="left">
+                <van-checkbox v-model="data.submitChecked" checked-color="#ffc400" @click="chooseAll">全选</van-checkbox>
+            </div>
+            <div class="delete">删除</div>
+        </div>
     </div>
 </template>
 
@@ -36,7 +43,7 @@ const init = () => { // 做默认全选功能
 const onSubmit = () => {
     console.log('提交')
 }
-const choseAll = () => {
+const chooseAll = () => {
     if (data.checked.length !== store.state.cartList.length) {
         init()
     } else {

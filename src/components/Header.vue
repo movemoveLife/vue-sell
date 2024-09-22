@@ -2,16 +2,29 @@
     <div class="header">
         <van-icon name="arrow-left" class="icon" @click="toBack"></van-icon>
         <div>{{ title }}</div>
+        <div class="edit" v-if="edit" @click="handleEdit">编辑</div>
     </div>
 </template>
 
 <script setup>
 import { defineProps } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-const props = defineProps(['title']);
+import { Toast } from 'vant'
+
+const props = defineProps(['title', 'edit']);
+const store = useStore();
 const router = useRouter();
+
 const toBack = () => {
     router.back();
+}
+const handleEdit = () => {
+    if (store.state.cartList.length) {
+        store.commit('changeDelete');
+    } else {
+        Toast.fail('请先添加商品到购物车!');
+    }
 }
 </script>
 
