@@ -25,6 +25,7 @@ import { reactive, onMounted, computed, defineProps } from 'vue'
 import { useStore } from 'vuex'
 import { Toast } from 'vant'
 import ListItem from '@/components/ListItem.vue'
+import router from '@/router';
 
 const props = defineProps(['changeShow']);
 const store = useStore()
@@ -45,6 +46,7 @@ const init = () => { // 做默认全选功能
 const onSubmit = () => {
     if (data.checked.length) {
         store.commit('pay', updateData()) // 将选中的数据传过去
+        router.push('/createorder')
     } else {
         Toast.fail('请选择商品')
     }
