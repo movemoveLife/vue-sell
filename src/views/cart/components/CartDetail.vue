@@ -43,7 +43,11 @@ const init = () => { // 做默认全选功能
     data.checked = store.state.cartList.map(item => item.id)
 }
 const onSubmit = () => {
-    console.log('提交')
+    if (data.checked.length) {
+        store.commit('pay', updateData()) // 将选中的数据传过去
+    } else {
+        Toast.fail('请选择商品')
+    }
 }
 const chooseAll = () => {
     if (data.checked.length !== store.state.cartList.length) {

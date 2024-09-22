@@ -5,6 +5,7 @@ export default createStore({
         cartList: [], // 购物车列表数据
         isDelete: true, // 确定header组件 点击编辑的时候 底部组件的展示
         edit: true, // 默认展示编辑的状态
+        orderList: [], // 订单列表
     },
     mutations: {
         addCart(state, value) {
@@ -22,6 +23,9 @@ export default createStore({
             } else {
                 state.edit = !state.edit
             }
+        },
+        pay(state, value) {
+            state.orderList = value
         }
     },
     actions: {}
