@@ -14,7 +14,6 @@
 <style lang="less" scoped>
 .empty-content {
     flex: 1;
-    margin: 20px;
     font-size: 16px;
     overflow-y: auto;
     display: flex;
