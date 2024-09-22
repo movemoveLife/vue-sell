@@ -2,7 +2,9 @@
     <div class="header">
         <van-icon name="arrow-left" class="icon" @click="toBack"></van-icon>
         <div>{{ title }}</div>
-        <div class="edit" v-if="edit" @click="handleEdit">编辑</div>
+        <div class="edit" v-if="edit" @click="handleEdit">
+            {{store.state.edit ? '编辑' : '完成'}}
+        </div>
     </div>
 </template>
 
@@ -21,6 +23,7 @@ const toBack = () => {
 }
 const handleEdit = () => {
     if (store.state.cartList.length) {
+        store.commit('edit');
         store.commit('changeDelete');
     } else {
         Toast.fail('请先添加商品到购物车!');

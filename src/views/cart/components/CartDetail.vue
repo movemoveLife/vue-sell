@@ -15,16 +15,18 @@
             <div class="left">
                 <van-checkbox v-model="data.submitChecked" checked-color="#ffc400" @click="chooseAll">全选</van-checkbox>
             </div>
-            <div class="delete">删除</div>
+            <div class="delete" @click="handleDelete">删除</div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { reactive, onMounted, computed } from 'vue'
+import { reactive, onMounted, computed, defineProps } from 'vue'
 import { useStore } from 'vuex'
+import { Toast } from 'vant'
 import ListItem from '@/components/ListItem.vue'
 
+const props = defineProps(['changeShow']);
 const store = useStore()
 const data = reactive({
     checked: [],
@@ -59,15 +61,38 @@ const groupChange = (result) => {
     data.checked = result
 }
 const allPrice = computed(() => {
-    let countList = store.state.cartList.filter(item => {
-        return data.checked.includes(item.id)
-    })
+    let countList = updateData()
     let sum = 0
     countList.forEach(item => {
         sum += item.num * item.price
     })
     return sum * 100
 })
+const updateData = (type) => {
+    return store.state.cartList.filter((item) => {
+        if (type === 'delete') {
+            return !data.checked.includes(item.id)
+        } else {
+            return data.checked.includes(item.id)
+        }
+    })
+}
+const handleDelete = () => {
+    // 部分删除
+    // 判断 data的checked 是否有值
+    if (data.checked.length) {
+        store.commit('delete', updateData('delete'))
+        data.checked = []
+        // 购物车没有数据的时候
+        if (!store.state.cartList.length) {
+            props.changeShow() // 可以看到直接操作props的属性
+            store.commit('edit', 'delete')
+        }
+    } else {
+        Toast.fail('请选择要删除的商品')
+    }
+    // 全部删除
+}
 onMounted(() => {
     init()
 })
