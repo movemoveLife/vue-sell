@@ -46,7 +46,12 @@ const init = () => { // 做默认全选功能
 const onSubmit = () => {
     if (data.checked.length) {
         store.commit('pay', updateData()) // 将选中的数据传过去
-        router.push('/createorder')
+        router.push({
+            path: '/createorder',
+            query: {
+                list: data.checked,
+            }
+        })
     } else {
         Toast.fail('请选择商品')
     }

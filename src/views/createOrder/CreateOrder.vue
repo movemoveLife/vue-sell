@@ -21,8 +21,12 @@
 import Header from '@/components/Header.vue'
 import { ref, reactive, onMounted } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+import { Dialog } from 'vant'
 
 const store = useStore()
+const router = useRouter()
+const route = useRoute()
 const data = reactive({
     name: 'jason',
     tel: '13868050257',
@@ -41,10 +45,30 @@ const initPrice = () => {
     data.totalPrice = price
 }
 const createOrder = () => {
-
+    Dialog({
+        title: '提示',
+        message: '生成订单成功'
+    }).then(() => {
+        // 要和购物车联系起来
+        let newList = store.state.cartList.filter(item => {
+            return !route.query.list.includes(item.id + "")
+        })
+        store.commit('delete', newList)
+        router.push('/order')
+    })
+}
+// 初始化用户地址
+const initUser = () => {
+    store.state.userAddress.forEach(item => {
+        if (item.isDefault) {
+            data.name = item.name
+            data.tel = item.tel
+        }
+    })
 }
 onMounted(() => {
     initPrice()
+    initUser()
 })
 </script>
 
