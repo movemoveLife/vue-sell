@@ -54,6 +54,7 @@ const createOrder = () => {
             return !route.query.list.includes(item.id + "")
         })
         store.commit('delete', newList)
+        store.commit('orderListEd')
         router.push('/order')
     })
 }

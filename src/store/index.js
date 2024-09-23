@@ -30,6 +30,7 @@ export default createStore({
                 areaCode: '110101',
             },
         ], // 用户地址
+        orderListEnd: [], // 订单完成列表
     },
     mutations: {
         addCart(state, value) {
@@ -50,6 +51,9 @@ export default createStore({
         },
         pay(state, value) {
             state.orderList = value
+        },
+        orderListEd(state) {
+            state.orderListEnd = state.orderListEnd.concat(state.orderList)
         }
     },
     actions: {}
