@@ -5,6 +5,8 @@ import Mine from '../views/mine/Mine.vue'
 import Cart from '../views/cart/Cart.vue'
 import Store from '../views/store/Store.vue'
 import CreateOrder from '../views/createOrder/CreateOrder.vue'
+import Address from '../views/address/Address.vue'
+import AddressEdit from '../views/addressEdit/AddressEdit.vue'
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -32,6 +34,14 @@ const router = createRouter({
         {
             path: '/createorder',
             component: CreateOrder
+        },
+        {
+            path: '/address',
+            component: Address
+        },
+        {
+            path: '/addressedit',
+            component: AddressEdit
         }
     ]
 })

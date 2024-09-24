@@ -33,7 +33,7 @@ const data = reactive({
     totalPrice: 0
 })
 const onEdit = () => {
-    console.log('编辑')
+    router.push('/address')
 }
 const initPrice = () => {
     let price = 0
