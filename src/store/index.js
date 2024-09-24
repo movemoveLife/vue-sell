@@ -54,7 +54,35 @@ export default createStore({
         },
         orderListEd(state) {
             state.orderListEnd = state.orderListEnd.concat(state.orderList)
-        }
+        },
+        addAddress(state, value) {
+            state.userAddress.map(item => {
+                if (value.isDefault) {
+                    item.isDefault = false
+                }
+            })
+            state.userAddress.push(value)
+        },
+        editAddress(state, value) {
+            state.userAddress = state.userAddress.map(item => {
+                if (value.isDefault) {
+                    item.isDefault = false
+                }
+                if (item.id === value.id) {
+                    return value
+                } else {
+                    return item
+                }
+            })
+        },
+        deleteAddress(state, value) {
+            state.userAddress = state.userAddress.filter(item => {
+                return !(item.id === value.id)
+            })
+            if (value.isDefault) { // 如果删除的是默认地址，则将第一个地址设为默认地址
+                state.userAddress[0].isDefault = true
+            }
+        },
     },
     actions: {}
 })

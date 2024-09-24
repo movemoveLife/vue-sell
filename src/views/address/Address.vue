@@ -26,10 +26,21 @@ const init = () => {
     })
 }
 const onAdd = () => {
-    router.push('/addressedit')
+    router.push({
+        path: '/addressedit',
+        query: {
+            type: 'add'
+        }
+    })
 }
-const onEdit = () => {
-    router.push('addressedit')
+const onEdit = (item) => {
+    router.push({
+        path: '/addressedit',
+        query: {
+            id: item.id,
+            type: 'edit'
+        }
+    })
 }
 onMounted(() => {
     init()
