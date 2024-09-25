@@ -3,9 +3,9 @@
         <Header title="登录" />
         <div class="img">买团</div>
         <van-form @submit="onSubmit">
-            <van-field v-model="data.username" name="用户名" label="用户名" placeholder="用户名"
+            <van-field v-model="data.username" name="user" label="用户名" placeholder="用户名"
                 :rules="[{ required: true, message: '请填写用户名' }]" />
-            <van-field v-model="data.password" type="password" name="密码" label="密码" placeholder="密码"
+            <van-field v-model="data.password" type="password" name="pass" label="密码" placeholder="密码"
                 :rules="[{ required: true, message: '请填写密码' }]" />
             <div style="margin: 16px;">
                 <van-button round block type="info" native-type="submit" color="#ffc400">登录</van-button>
@@ -22,6 +22,7 @@ import Footer from '@/components/Footer.vue';
 import { useRouter } from 'vue-router';
 import { reactive } from 'vue';
 import { useStore } from 'vuex';
+import { Toast } from 'vant';
 const router = useRouter();
 const store = useStore();
 
@@ -29,8 +30,24 @@ const data = reactive({
     username: '',
     password: ''
 })
-const onSubmit = () => {
-
+const onSubmit = (value) => {
+    if (!localStorage.userInfo) {
+        Toast('账号未注册');
+        return;
+    } else {
+        let userInfo = JSON.parse(localStorage.userInfo);
+        if (userInfo['user'] === value['user']) {
+            if (userInfo['pass'] === value['pass']) {
+                Toast('登录成功');
+                localStorage.setItem('isLogin', 'login');
+                router.push('/home');
+            } else {
+                Toast('密码错误');
+            }
+        } else {
+            Toast('账号不存在');
+        }
+    }
 }
 const toRegister = () => {
     router.push('/register');

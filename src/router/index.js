@@ -10,6 +10,7 @@ import AddressEdit from '../views/addressEdit/AddressEdit.vue'
 import UserInfoEdit from '../views/userinfoedit/UserInfoEdit.vue'
 import Login from '../views/login/Login.vue'
 import Register from '../views/register/Register.vue'
+import { Toast } from 'vant'
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -20,15 +21,24 @@ const router = createRouter({
         },
         {
             path: '/order',
-            component: Order
+            component: Order,
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/mine',
-            component: Mine
+            component: Mine,
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/cart',
-            component: Cart
+            component: Cart,
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/store',
@@ -36,19 +46,31 @@ const router = createRouter({
         },
         {
             path: '/createorder',
-            component: CreateOrder
+            component: CreateOrder,
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/address',
-            component: Address
+            component: Address,
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/addressedit',
-            component: AddressEdit
+            component: AddressEdit,
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/userinfoedit',
-            component: UserInfoEdit
+            component: UserInfoEdit,
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/login',
@@ -61,4 +83,17 @@ const router = createRouter({
     ]
 })
 
+router.beforeEach((to, from, next) => {
+    if (to.meta.isAuth) {
+        // 一会登录了以后 会在localStorage里面 存储一个标识
+        if (localStorage.isLogin === 'login') {
+            next()
+        } else {
+            next('/login')
+            Toast('请先去登录')
+        }
+    } else {
+        next()
+    }
+})
 export default router
