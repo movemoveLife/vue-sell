@@ -14,6 +14,7 @@ import {
 } from 'vant'
 // 2. 引入vant样式
 import 'vant/lib/index.css'
+import './api/mock'
 
 const app = createApp(App)
 

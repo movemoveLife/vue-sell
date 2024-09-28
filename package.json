@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "amfe-flexible": "^2.2.1",
+    "axios": "^1.7.7",
     "i": "^0.3.7",
     "less": "^4.2.0",
     "less-loader": "^7.3.0",
+    "mockjs": "^1.1.0",
     "postcss-pxtorem": "^5.1.1",
     "vant": "next",
     "vue": "^3.4.29",
