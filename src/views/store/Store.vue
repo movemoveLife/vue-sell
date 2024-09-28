@@ -31,7 +31,7 @@ import { reactive, toRefs, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { Toast } from 'vant'
-import axios from 'axios'
+import { getApiStoreData } from '@/api/api'
 
 let store = useStore();
 let router = useRouter();
@@ -41,11 +41,8 @@ let data = reactive({
     storeData: [],
 })
 const getStoreData = () => {
-    axios.get('/home/getStoreData').then((res) => {
-        const { storeData, code } = res.data
-        if (code === 200) {
-            data.storeData = storeData
-        }
+    getApiStoreData().then(res => {
+        data.storeData = res;
     })
 }
 onMounted(() => {

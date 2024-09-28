@@ -61,7 +61,7 @@ export default {
 
 <script setup>
 import { reactive, toRefs, ref, onMounted } from 'vue';
-import axios from 'axios';
+import { getApiHomeData } from '@/api/api';
 
 let data = reactive({
   big_sort: [],
@@ -75,13 +75,10 @@ onMounted(() => {
 const active = ref(0)
 
 const getHomeData = async () => {
-  axios.get('/home/getHomeData').then(res => {
-    const { code, homeData } = res.data
-    if (code === 200) {
-      data.big_sort = homeData.big_sort
-      data.small_sort = homeData.small_sort
-      data.centent_nav_list = homeData.centent_nav_list
-    }
+  getApiHomeData().then(res => {
+    data.big_sort = res.big_sort
+    data.small_sort = res.small_sort
+    data.centent_nav_list = res.centent_nav_list
   })
 };
 onMounted(() => {
