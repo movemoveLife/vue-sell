@@ -117,7 +117,7 @@ const handleAddCart = (type) => {
         Toast("请选择商品");
         return
     }
-    store.commit("addCart", newList);
+    store.commit("ADDCART", newList);
     type === 'buy' ? goCart() : ''
 }
 const goCart = () => {
